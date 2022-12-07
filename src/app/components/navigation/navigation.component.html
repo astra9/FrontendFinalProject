@@ -1,1 +1,31 @@
-<p>navigation works!</p>
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <!--To add a rule later to decide which to display-->
+      <a class="navbar-brand"  routerLink="/" *ngIf="true">Super Chat</a>
+      <a class="navbar-brand"  routerLink="/chat" *ngIf="false">Super Chat</a>
+      <button class="navbar-toggler" (click)="switchToggle()" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="toggler-icon"></span>
+        <span class="toggler-icon"></span>
+        <span class="toggler-icon"></span>
+      </button> 
+      <div [class]="toggleMenu()" id="navbarSupportedContent"> 
+        <!--To add a rule later to decide which to display-->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="true">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/signin" routerLinkActive="active">Sign-in</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/register">Register</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="false">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/chat" routerLinkActive="active">My Chats</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>

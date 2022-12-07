@@ -1,0 +1,32 @@
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.navbar-brand{
+    padding: 0px 10px;
+}
+
+.navbar-toggler{
+    margin: 0 10px;
+    padding: 0px 5px;
+}
+
+.toggler-icon{
+    display: block;
+    width: 25px;
+    background-color: black;
+    border: solid 2px black;
+    border-radius: 60px;
+    margin:4px
+}
+
+.navbar{
+    min-height: 10vh;
+}
+
+.color-nav-menu{
+    background-color: rgb(244, 249, 252);
+    width:100vw;
+}
