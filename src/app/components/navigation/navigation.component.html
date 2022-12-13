@@ -1,6 +1,5 @@
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <!--To add a rule later to decide which to display-->
       <a class="navbar-brand"  routerLink="/" *ngIf="!currentUser">Super Chat</a>
       <a class="navbar-brand"  routerLink="/chat" *ngIf="currentUser">Super Chat</a>
       <button class="navbar-toggler" (click)="switchToggle()" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,7 +8,6 @@
         <span class="toggler-icon"></span>
       </button> 
       <div [class]="toggleMenu()" id="navbarSupportedContent"> 
-        <!--To add a rule later to decide which to display-->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="!currentUser">
           <li class="nav-item">
             <a class="nav-link" routerLink="/signin" routerLinkActive="active">Sign-in</a>
@@ -20,10 +18,13 @@
         </ul>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="currentUser">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/chat" routerLinkActive="active">My Chats</a>
+            <a class="nav-link" routerLink="/chat" routerLinkActive="active">Chats</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" (click)="logout()">Logout</a>
+            <a class="nav-link" [routerLink]="'/profile/' + currentUser.id" routerLinkActive="active">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link logout-link" (click)="logout()">Logout</a>
           </li>
         </ul>
       </div>

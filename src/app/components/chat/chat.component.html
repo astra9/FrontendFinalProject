@@ -1,2 +1,7 @@
 <app-navigation></app-navigation>
-<p>chat works!</p>
+<div class="chat d-flex">
+    <app-chatrooms (chatClicked)="eventHandlerFunc($event)" *ngIf="showChatRooms" class="chatrooms"></app-chatrooms>
+    <button *ngIf="!showChatRooms" class="btn-sm btn-success chat-button" (click)="toggleShowChatRooms()">Show Chats</button>
+    <button *ngIf="showChatRooms" class="btn-sm btn-danger chat-button" (click)="toggleShowChatRooms()">Hide Chats</button>
+    <app-chatroom-area *ngIf="!showChatRooms" class="chatroom-area"></app-chatroom-area>
+</div>

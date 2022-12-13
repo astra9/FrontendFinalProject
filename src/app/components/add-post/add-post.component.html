@@ -1,0 +1,24 @@
+<app-navigation></app-navigation>
+<main class="container d-flex justify-content-center align-items-center">
+    <div class="form-container text-center">
+        <h3 class="form-title">Add Post</h3>
+        <form [formGroup] = "addPostForm" (submit)="submitForm()" novalidate>
+            <div class="mb-3">
+                <input class="form-control" type="text" formControlName="text" 
+                placeholder="Enter the text of your post"/>
+                <ul class="text-danger list-unstyled mt-1" *ngIf="addPostForm.controls['text'].dirty">
+                    <li *ngFor="let err of addPostForm.controls['text'].errors
+                        | errorHelper: 'text'">
+                        {{ err }}
+                    </li>
+                </ul>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-success" type="submit" 
+                [disabled]="!addPostForm.valid">
+                    Save
+                </button>
+            </div>
+        </form>
+    </div>
+</main>

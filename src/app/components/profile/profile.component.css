@@ -1,0 +1,62 @@
+.container{
+    /*margin-top:5vh;*/
+    padding-top:5vh;
+}
+
+.image-container{
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+}
+
+.profile-image{
+    width: 100%;
+    overflow:hidden;
+    border-radius: 50%;
+}
+
+.edit-btn-container{
+    margin-top:5vh;
+}
+
+.edit-profile-btn{
+    cursor: pointer;
+}
+
+.posts{
+    padding-left: 10px;
+    width: 60vw;
+}
+
+.info-container {
+    box-shadow: 2px 2px 2px 2px rgba(92, 95, 95, 0.603);
+    height: 90vh;
+    width: 40vw;
+    overflow: scroll;
+}
+
+.info{
+    margin-bottom: 2.5vh;
+}
+
+.info-label{
+    font-weight: bold;
+    padding-right: 20px;
+}
+
+.card{
+    padding:5px;
+    border: 2px solid rgba(63, 59, 59, 0.856) 
+}
+
+.post{
+    margin: 2.5vh 0;
+}
+
+.posts-container{
+    margin-bottom: 5vh;
+    box-shadow: 2px 2px 2px 2px rgba(92, 95, 95, 0.603);
+    height: 70vh;
+    padding: 5px;
+    overflow: scroll;
+}

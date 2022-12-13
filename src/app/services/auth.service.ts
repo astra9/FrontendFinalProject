@@ -13,6 +13,7 @@ import { switchMap } from 'rxjs/operators';
 export class AuthService {
 
   public currentUser: Observable<unknown>
+  public tmpUser: unknown=undefined;
   
   constructor(
     private router: Router,
@@ -29,6 +30,7 @@ export class AuthService {
           }
         }
      ));
+     this.setTmpUser();
   }
 
   public signUp(firstName: string, lastName: string, 
@@ -37,15 +39,14 @@ export class AuthService {
         this.afAuth.createUserWithEmailAndPassword(email, password)
         .then(user=>{
           const tmpUser: AngularFirestoreDocument<User> = this.firstoreDB.doc(`users/${user.user?.uid}`);
-          const updateUser = {
+          tmpUser.set({
             id: user.user?.uid,
             email: user.user?.email,
             firstName,
             lastName,
-            photo: 'https://firebasestorage.googleapis.com/v0/b/finalprojecttest-e7b45.appspot.com/o/default-img.jpg?alt=media&token=82c139a9-c3f5-4694-a9a1-4dba7914d24d',
-            aboutMe: ""
-          }
-          tmpUser.set(updateUser);
+            photo: 'https://firebasestorage.googleapis.com/v0/b/finalproject-a7193.appspot.com/o/default-img.jpg?alt=media&token=3ec4e53c-8c86-4d5d-b6c9-64d790d6866d',
+            aboutMe: "I am new here!"
+          });
         }).catch(error =>{
           console.log(error)
           success=false;
@@ -53,13 +54,16 @@ export class AuthService {
         return of(success);
   }
 
-  public login(email: string, password: string): Observable<boolean>{
-    return from(this.afAuth.signInWithEmailAndPassword(email, password)
-    .then(result=>{
-      return true;
-    }).catch(error =>{
-      return false;
-    }));
+  public async login(email: string, password: string): Promise<Observable<boolean>>{
+      let result = await this.afAuth.signInWithEmailAndPassword(email, password)
+      .then(result=>{
+          return true;
+        })
+      .catch(error =>{
+          return false;
+        })
+      
+      return of(result)
   }
 
   public logout(){
@@ -68,6 +72,12 @@ export class AuthService {
         this.router.navigate(['/signin']);
       }
     );
+  }
+
+  private setTmpUser(){
+    this.currentUser.subscribe(user => {
+      this.tmpUser = user
+    })
   }
 
 }

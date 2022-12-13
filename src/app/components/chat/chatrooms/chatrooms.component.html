@@ -1,0 +1,14 @@
+<div class="d-flex flex-column chatrooms-container">
+    <h2 class="chatroom-title p-4">Chats</h2>
+    <div class="chatrooms">
+        <ng-container *ngFor="let chatroom of chatrooms">
+            <div class="chatroom d-flex flex-row ">
+                <a class="chatroom-link" (click)="clickChatroom()" [routerLink] = "['/chat', chatroom.id]">{{chatroom.name}}</a>
+                <button class="delete-btn btn-sm btn-danger" (click)="deleteChat(chatroom.id)">Delete</button>
+            </div>
+        </ng-container>
+    </div>
+    <div class="create-chat-container text-center">
+        <button class="btn btn-success create-chat-btn" routerLink="/create-chat">Create New Chat!</button>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<app-navigation></app-navigation>
+
+<main class="container d-flex justify-content-center align-items-center">
+    <div class="form-container text-center">
+        <h3 class="form-title">Edit</h3>
+        <form [formGroup] = "editForm" (submit)="submitForm()" novalidate>
+            <div class="mb-3">
+                <input class="form-control" type="text" formControlName="firstName" 
+                placeholder="Enter your first name"/>
+                <ul class="text-danger list-unstyled mt-1" *ngIf="this.editForm.controls['firstName'].dirty">
+                    <li *ngFor="let err of editForm.controls['firstName'].errors
+                     | errorHelper: 'first name'">
+                        {{ err }}
+                    </li>
+                </ul>
+            </div>
+            <div class="mb-3">
+                <input class="form-control" type="text" formControlName="lastName"
+                placeholder="Enter your last name"/>
+                <ul class="text-danger list-unstyled mt-1" *ngIf="this.editForm.controls['lastName'].dirty">
+                    <li *ngFor="let err of editForm.controls['lastName'].errors
+                     | errorHelper: 'last name'">
+                        {{ err }}
+                    </li>
+                </ul>
+            </div>
+            <div class="mb-3">
+                <input class="form-control" type="text" 
+                    placeholder="Write something about you" formControlName="aboutMe"/>
+                    <ul class="text-danger list-unstyled mt-1" *ngIf="this.editForm.controls['aboutMe'].dirty">
+                        <li *ngFor="let err of editForm.controls['aboutMe'].errors
+                         | errorHelper: 'About Me'">
+                            {{ err }}
+                        </li>
+                    </ul>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-success" type="submit" 
+                [disabled]="!editForm.valid">
+                    Save
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+

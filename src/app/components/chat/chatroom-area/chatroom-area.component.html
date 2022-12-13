@@ -1,0 +1,46 @@
+<div class="w-100 d-flex flex-column chat-area justify-content-center align-items-center">
+    <ng-container *ngIf="!chatroom">
+     <div class="room-selection h-100 w-100 d-flex justify-content-center align-items-center">
+         <div class="select-room-messages text-center">
+             <h3 class="text-center select-chat">Select a chat. Click on the show chats button on the left.</h3>
+         </div>
+     </div>
+    </ng-container>
+    <ng-container *ngIf="chatroom">
+        <div class="chatroom-title">
+            <h3>{{chatroomName}}</h3>
+        </div>
+         <div class="messages-container" #scrollContainer>
+             <div *ngFor="let message of messages">
+                 <div class="message d-flex">
+                     <div class="image-container">
+                         <img [src]="message.sender.photo" class="rounded-circle">
+                     </div>
+                     <div>
+                        <div class="first-name-and-last-name">
+                            <a [routerLink]="'/profile/' + message.sender.id">
+                                {{message.sender.firstName}} {{message.sender.lastName}}
+                            </a>
+                        </div>
+                        <div class="timestamp">
+                            {{message.createdOn["seconds"] * 1000 | date: 'yyyy/MM/dd h:mm:ss a'}}
+                        </div>
+                        <div class="message-text">
+                            {{message.message}}
+                        </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <footer class="message-container d-flex">
+             <div class="input-group p-2 w-75 ">
+                <input [(ngModel)]="messageText" type="text" class="form-control" placeholder="Enter a message"
+                 (keyup.enter)="submitMessage(messageText)" /> 
+                <button class="btn btn-success" type="button" (click)="submitMessage(messageText)">Send</button>
+             </div>
+         </footer>
+     </ng-container>
+ </div>
+ 
+ 
+ 

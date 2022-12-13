@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
@@ -10,41 +10,50 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit, OnDestroy {
-
+  
+  public signInForm: FormGroup = new FormGroup({
+    email:  new FormControl("", {validators: [Validators.required, Validators.email]}),
+    password:  new FormControl("", {validators:[Validators.required, Validators.minLength(8)]})
+  });
+  private subscriptions: Subscription[]=[];
+  private redirectUrl: string="";
+  public displayFailedSignIn=false;
+  
   constructor(
-    private formBuilder: FormBuilder, 
     private auth: AuthService,
     private router: Router,
-    private route: ActivatedRoute) { 
-    this.signInForm = this.formBuilder.group({
-      email: ["", [Validators.required, Validators.email]],
-      password: ["", [Validators.required, Validators.minLength(8)]]
+    private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    if(this.route.snapshot.queryParams["redirectUrl"]){
+      this.redirectUrl=this.route.snapshot.queryParams["redirectUrl"]
+    } else{
+      this.redirectUrl='/chat';
+    }
+    this.auth.currentUser.subscribe(user=>{
+      if(user){
+        this.router.navigateByUrl(this.redirectUrl)
+      }
     })
   }
 
-  ngOnInit(): void {
-    this.redirectUrl=this.route.snapshot.queryParams["redirectUrl"] || '/chat';
-  }
-
-  public signInForm: FormGroup;
-  private subscriptions: Subscription[]=[];
-  private redirectUrl: string="";
-
-  public submitForm(): void{
+  public async submitForm(): Promise<void>{
     if(this.signInForm.valid){
-      const {email, password} = this.signInForm.value;
+      let resolvedPromise = await this.auth.login(
+        this.signInForm.value.email,
+        this.signInForm.value.password
+      )
       this.subscriptions.push(
-        this.auth.login(email,password).subscribe(success => {
+        resolvedPromise.subscribe(success => {
           if(success){
             this.router.navigateByUrl(this.redirectUrl);
+            this.displayFailedSignIn=false;
           } else{
             this.failedSignIn();
           }
         })
       )
-    } else{
-      this.failedSignIn();
-    }
+    } 
     
   }
 
@@ -53,6 +62,6 @@ export class SigninComponent implements OnInit, OnDestroy {
   }
 
   failedSignIn(){
-    console.log("failed signIn");
+    this.displayFailedSignIn=true;
   }
 }

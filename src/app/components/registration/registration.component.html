@@ -2,22 +2,46 @@
 <main class="container d-flex justify-content-center align-items-center">
     <div class="form-container text-center">
         <h3 class="form-title">Register</h3>
-        <form [formGroup] = "registerForm" (submit)="submitForm()" novalidate>
+        <form  [formGroup] = "registerForm" (submit)="submitForm()" novalidate >
             <div class="mb-3">
                 <input class="form-control" type="text" formControlName="firstName" 
-                placeholder="Enter your first name"/>
+                 placeholder="Enter your first name" />
+                <ul class="text-danger list-unstyled mt-1" *ngIf="this.registerForm.controls['firstName'].dirty">
+                    <li *ngFor="let err of registerForm.controls['firstName'].errors
+                     | errorHelper: 'first name'">
+                        {{ err }}
+                    </li>
+                </ul>
             </div>
             <div class="mb-3">
                 <input class="form-control" type="text" formControlName="lastName"
-                placeholder="Enter your last name"/>
+                placeholder="Enter your last name" />
+                <ul class="text-danger list-unstyled mt-1" *ngIf="this.registerForm.controls['lastName'].dirty">
+                    <li *ngFor="let err of registerForm.controls['lastName'].errors
+                     | errorHelper: 'last name'">
+                        {{ err }}
+                    </li>
+                </ul>
             </div>
             <div class="mb-3">
                 <input class="form-control" type="email" 
-                    placeholder="Enter Your Email" formControlName="email"/>
+                    placeholder="Enter Your Email" formControlName="email" />
+                    <ul class="text-danger list-unstyled mt-1" *ngIf="this.registerForm.controls['email'].dirty">
+                        <li *ngFor="let err of registerForm.controls['email'].errors
+                         | errorHelper: 'email'">
+                            {{ err }}
+                        </li>
+                    </ul>
             </div>
             <div class="mb-3">
                 <input class="form-control" type="password" 
-                    placeholder="password" formControlName="password"/>
+                    placeholder="password" formControlName="password" />
+                <ul class="text-danger list-unstyled mt-1" *ngIf="this.registerForm.controls['password'].dirty">
+                    <li *ngFor="let err of registerForm.controls['password'].errors
+                        | errorHelper: 'password'">
+                        {{ err }}
+                    </li>
+                </ul>
             </div>
             <div class="mb-3">
                 <button class="btn btn-success" type="submit" 

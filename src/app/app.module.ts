@@ -13,7 +13,15 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth'
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
 import { AngularFireStorageModule } from '@angular/fire/compat/storage'
 import { AuthService } from './services/auth.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChatroomAreaComponent } from './components/chat/chatroom-area/chatroom-area.component';
+import { ChatroomsComponent } from './components/chat/chatrooms/chatrooms.component';
+import { MessagingServiceService } from './services/messaging-service.service';
+import { CreateChatComponent } from './components/create-chat/create-chat.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { AddPostComponent } from './components/add-post/add-post.component';
+import { ErrorHelperPipe } from './pipes/error-helper.pipe';
 
 
 @NgModule({
@@ -22,11 +30,19 @@ import { ReactiveFormsModule } from '@angular/forms';
     ChatComponent,
     NavigationComponent,
     SigninComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ChatroomAreaComponent,
+    ChatroomsComponent,
+    CreateChatComponent,
+    ProfileComponent,
+    EditProfileComponent,
+    AddPostComponent,
+    ErrorHelperPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -34,7 +50,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AngularFireAuthModule, 
   ],
   providers: [
-    AuthService
+    AuthService,
+    MessagingServiceService
   ],
   bootstrap: [AppComponent]
 })

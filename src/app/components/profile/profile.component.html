@@ -1,0 +1,42 @@
+<app-navigation></app-navigation>
+<div class="d-flex">
+    <div class=" info-container container d-flex-column  
+            justify-content-center align-items-center">
+        <div class="info">
+            <span class="info-label">First Name:</span> {{userById.firstName}}
+        </div>
+        <div class="info">
+            <span class="info-label">Last Name:</span> {{userById.lastName}}
+        </div>
+        <div class="info">
+            <span class="info-label">Email:</span> {{userById.email}}
+        </div>
+        <div class="info">
+            <span class="info-label">About Me:</span> {{userById.aboutMe}}
+        </div>
+        <div>
+            <span class="info-label">Photo:</span>
+            <div class="image-container">
+                <img class="profile-image" [src]="userById.photo"/>
+            </div>
+        </div>
+        <div class="edit-btn-container" *ngIf="currentUser.id==userById.id">
+            <button class="btn btn-success edit-profile-btn" (click)="editProfile()">Edit</button>
+        </div>
+    </div>
+    <div class="posts container d-flex-column  justify-content-center align-items-center">
+        <div class="posts-container" >
+            <ng-container *ngFor="let post of userPosts">
+                <div class="card post">
+                    <h5 class="card-title">{{post.text}} </h5>
+                    <div *ngIf="currentUser.id==userById.id">
+                        <button class="btn-sm btn-danger" (click)="deletePost(post.id)">delete</button>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div class="text-center" *ngIf="currentUser.id==userById.id">
+            <button class="btn btn-success edit-profile-btn" (click)="addPost()">Add Post</button>
+        </div>
+    </div>
+</div>

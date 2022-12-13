@@ -2,17 +2,32 @@
 <main class="container d-flex justify-content-center align-items-center">
     <div class="form-container text-center">
         <h3 class="form-title">Sign In!</h3>
-        <form [formGroup] = "signInForm" (submit)="submitForm()" novalidate>
+        <div class="failed-sign-in" *ngIf="displayFailedSignIn">
+            Failed Sign In. Your password and/or email are incorrect.
+        </div>
+        <form [formGroup] = "signInForm" (submit)="submitForm()">
             <div class="mb-3">
                 <input class="form-control" type="email" 
                     placeholder="Enter Your Email" formControlName="email"/>
+                <ul class="text-danger list-unstyled mt-1" *ngIf="this.signInForm.controls['email'].dirty">
+                    <li *ngFor="let err of signInForm.controls['email'].errors
+                        | errorHelper: 'email'">
+                        {{ err }}
+                    </li>
+                </ul>
             </div>
             <div class="mb-3">
                 <input class="form-control" type="password" 
                     placeholder="password" formControlName="password"/>
+                <ul class="text-danger list-unstyled mt-1" *ngIf="this.signInForm.controls['password'].dirty">
+                    <li *ngFor="let err of signInForm.controls['password'].errors
+                        | errorHelper: 'password'">
+                        {{ err }}
+                    </li>
+                </ul>
             </div>
             <div class="mb-3">
-                <button class="btn btn-success" type="submit" >
+                <button [disabled]="!signInForm.valid" class="btn btn-success" type="submit" >
                     Sign In!
                 </button>
             </div>

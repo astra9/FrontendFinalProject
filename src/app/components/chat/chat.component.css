@@ -1,0 +1,32 @@
+* {
+    margin :0px;
+}
+
+.chat {
+    width:100vw;
+}
+
+.open{
+    position:absolute;
+    left:25%
+}
+
+.close{
+    position: relative;
+}
+
+.chat-button{
+    width: 20%;
+    text-align: center;
+    overflow-x: scroll;
+    padding-right:20px;
+}
+
+.chatrooms{
+    width:100%;
+}
+
+.chatroom-area{
+    width: 100%;
+    height: 90vh;
+}

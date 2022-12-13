@@ -19,12 +19,14 @@ export class AuthGuard implements CanActivate{
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | boolean {
     return this.auth.currentUser.pipe(
-      map((currentUser) => !!currentUser),
-      tap((loggedIn: any)=>{
-        if(!loggedIn){
+      map((currentUser) => {
+        if(currentUser==null){
           this.router.navigate(['/signin'], {queryParams: {redirectUrl: state.url}})
+          return false;
+        } else{
+          return true;
         }
-      })
+      }),
     );
   }
   
