@@ -1,12 +1,16 @@
 .messages-container {
     overflow-y: scroll;
-    margin:1rem 0;
     box-shadow: 2px 2px 2px 2px rgba(92, 95, 95, 0.603);;
-    padding: 10px;
     background-color: white;
     border-radius: 10px;
     width: 60vw;
-    height: 100%;
+    height: 65vh;
+    margin-bottom: 2.5vh;
+}
+
+.chatroom-title{
+    height: 6.5vh;
+    text-align: center;
 }
 
 .select-chat{
@@ -15,10 +19,13 @@
 
 .image-container{
     height: 50px;
+    width: 50px;
+    margin:10px;
 }
 
 .rounded-circle{
     height: 100%;
+    width: 100%;
 }
 
 .message{
@@ -34,7 +41,7 @@
 }
 
 .chat-area{
-    height: 90vh;
+    height: 100%;
     background-color: rgba(229, 243, 252, 0.432);
 }
 
@@ -42,6 +49,7 @@
     border-top: 2px solid  rgba(92, 95, 95, 0.144);
     background-color: rgba(137, 43, 226, 0.637);
     width:100%;
-    align-items: center;
+    height: 16vh;
     justify-content: center;
+    padding-bottom: 30px;
 }

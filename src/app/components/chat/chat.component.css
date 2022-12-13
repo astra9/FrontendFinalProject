@@ -20,6 +20,7 @@
     text-align: center;
     overflow-x: scroll;
     padding-right:20px;
+    height: 90vh;
 }
 
 .chatrooms{

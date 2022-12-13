@@ -29,13 +29,13 @@
 }
 
 .navbar{
-    min-height: 10vh;
-    background-color: rgba(114, 55, 170, 0.774);
+    height: 10vh;
+    background-color: rgba(114, 55, 170);
     box-shadow: 2px 2px 2px 2px rgba(92, 95, 95, 0.603);;
 }
 
 .color-nav-menu{
-    background-color: rgba(114, 55, 170, 0.774);
+    background-color: rgba(114, 55, 170);
     width:100vw;
 }
 
